@@ -318,3 +318,24 @@ Other Changes
 
 * The :manual:`cmake-file-api(7)` "codemodel" version 2 "target" object gained
   a new ``precompileHeaders`` field in the ``compileGroups`` objects.
+
+Updates
+=======
+
+Changes made since CMake 3.18.0 include the following.
+
+3.18.1
+------
+
+* The :generator:`Xcode` generator, when :variable:`CMAKE_OSX_ARCHITECTURES`
+  is not defined, now selects ``$(NATIVE_ARCH_ACTUAL)`` as the default
+  architecture (the Xcode ``ARCHS`` setting).  This is needed for Xcode 12
+  to select the host's architecture, which older versions of Xcode did
+  by default.
+
+* In CMake 3.18.0 the :command:`add_test` command learned to support
+  special characters in test names.  This was accidentally left out of
+  its release notes.  Unfortunately the fix breaks existing projects
+  that were using manual quoting or escaping to work around the prior
+  limitation.  This fix has been reverted in 3.18.1, but may be
+  re-introduced in future versions of CMake with a policy for compatibility.
